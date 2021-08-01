@@ -1,6 +1,7 @@
 package config
 
-const NumberOfTopContentsToConsider = 5
+const NumberOfTopEntriesToConsider = 10
+const NumberOfLastEntriesToConsiderWhenSearchingByTag = 50 
 
 var User = ""
 var DbName = ""
