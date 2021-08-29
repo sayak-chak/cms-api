@@ -6,4 +6,4 @@ const Salt = "eoriu69045trhgeo4t5780ejr9t78340gjtu9eu9034oij490et74564564asdas8d
 
 var User = ""
 var DbName = ""
-var PostgresConfig = "postgres://sayakchakraborty@localhost:5432/postgres?sslmode=disable"
+var PostgresConfig = "postgres://username@localhost:5432/postgres?sslmode=disable"

@@ -22,7 +22,6 @@ func GetTagDBNameIfValid(inputTag string) (string, bool) {
 }
 
 func GetTagTableModelFor(tagTable string, contentId int) interface{} {
-	//TODO: remove if ladder in an elegent manner
 
 	if strings.EqualFold("actions", tagTable) {
 		return &models.Action{

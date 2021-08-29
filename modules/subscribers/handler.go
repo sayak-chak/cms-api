@@ -1,12 +1,25 @@
 package subscribers
 
 import (
-	"cms-api/database/postgres"
+	"cms-api/database"
 	models "cms-api/models/requests"
 	"encoding/json"
 
 	"github.com/gofiber/fiber/v2"
 )
+
+type Handler interface {
+	AddSubscriber(ctx *fiber.Ctx) error
+	DeleteSubscriber(ctx *fiber.Ctx) error
+}
+
+func NewHandler(database database.Database) Handler {
+	return &handler{
+		service: &service{
+			database: database,
+		},
+	}
+}
 
 type handler struct {
 	service *service
@@ -32,12 +45,4 @@ func (h *handler) DeleteSubscriber(ctx *fiber.Ctx) error {
 	}
 
 	return h.service.DeleteSubscriber(subscriberEmail.Email)
-}
-
-func NewHandler() *handler {
-	return &handler{
-		service: &service{
-			database: &postgres.Postgres{},
-		},
-	}
 }

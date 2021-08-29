@@ -2,13 +2,27 @@ package authors
 
 import (
 	"cms-api/custom_errors"
-	"cms-api/database/postgres"
+	"cms-api/database"
 	models "cms-api/models/requests"
 	"encoding/json"
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 )
+
+type Handler interface {
+	GetAuthors(ctx *fiber.Ctx) error
+	RegisterNewAuthor(ctx *fiber.Ctx) error
+	Login(ctx *fiber.Ctx) error
+}
+
+func NewHandler(database database.Database) Handler {
+	return &handler{
+		service: &service{
+			database: database,
+		},
+	}
+}
 
 type handler struct {
 	service *service
@@ -60,12 +74,4 @@ func (h *handler) Login(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Status(200).Send([]byte(loginResponseJson))
-}
-
-func NewHandler() *handler {
-	return &handler{
-		service: &service{
-			database: &postgres.Postgres{},
-		},
-	}
 }

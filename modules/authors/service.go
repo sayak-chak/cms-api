@@ -1,8 +1,8 @@
 package authors
 
 import (
+	"cms-api/config"
 	"cms-api/database"
-	"cms-api/database/postgres"
 	models "cms-api/models/requests"
 	responses "cms-api/models/responses"
 	"time"
