@@ -24,7 +24,7 @@ func addPublicRoutes(app *fiber.App, authorsHandler authors.Handler, subscribers
 	app.Patch("/unsubscribe", subscribersHandler.DeleteSubscriber) //TODO: patch or put?
 	app.Get("content/:contentId", contentsHandler.GetContent)
 	app.Get("/top-contents", contentsHandler.TopContents)
-	app.Get("/top-contents/:genre", contentsHandler.TopContentsByTag)
+	app.Get("/top-contents/:tag", contentsHandler.TopContentsByTag)
 	app.Post("/register", authorsHandler.RegisterNewAuthor) //TODO: something very similar for pass reset
 	app.Post("/login", authorsHandler.Login)
 	app.Post("/upvote", contentsHandler.Upvote)

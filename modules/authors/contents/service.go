@@ -1,10 +1,12 @@
 package contents
 
 import (
+	"cms-api/config"
 	"cms-api/custom_errors"
 	"cms-api/database"
 	models "cms-api/models/requests"
 	responseModels "cms-api/models/responses"
+	"cms-api/modules/authors/contents/cache_layer"
 	"cms-api/utils"
 
 	"github.com/gofiber/fiber/v2"
@@ -21,7 +23,16 @@ type service struct {
 }
 
 func (s *service) TopContents() (*[]responseModels.TopContentsResponse, error) {
-	return s.database.TopContents()
+	cachedRes := cache_layer.GetCachedResponseIfPossible(config.CommonCacheTag)
+	if cachedRes != nil {
+		return cachedRes, nil
+	}
+	topContents, err := s.database.TopContents()
+	if err != nil {
+		return nil, err
+	}
+	cache_layer.CacheThis(topContents, config.CommonCacheTag)
+	return topContents, nil
 }
 
 func (s *service) AddContent(addContentRequest *models.AddContentRequest, ctx *fiber.Ctx) error {
@@ -43,11 +54,11 @@ func (s *service) AddContent(addContentRequest *models.AddContentRequest, ctx *f
 		return err
 	}
 
-	for _, genre := range addContentRequest.Tags {
-		if genreTable, isValid := utils.GetTagDBNameIfValid(genre); !isValid {
+	for _, tag := range addContentRequest.Tags {
+		if tagTable, isValid := utils.GetTagDBNameIfValid(tag); !isValid {
 			return custom_errors.NoSuchTag()
 		} else {
-			err = s.database.AddContentToTag(utils.GetTagTableModelFor(genreTable, contentId))
+			err = s.database.AddContentToTag(utils.GetTagTableModelFor(tagTable, contentId))
 			if err != nil {
 				return err
 			}
@@ -56,13 +67,22 @@ func (s *service) AddContent(addContentRequest *models.AddContentRequest, ctx *f
 	return nil
 }
 
-func (s *service) TopContentsByTag(genre string) (*[]responseModels.TopContentsResponse, error) {
-	if genreTable, isValid := utils.GetTagDBNameIfValid(genre); !isValid {
+func (s *service) TopContentsByTag(inputTag string) (*[]responseModels.TopContentsResponse, error) {
+	tag, isValid := utils.GetTagDBNameIfValid(inputTag)
+	if !isValid {
 		return nil, custom_errors.NoSuchTag()
-	} else {
-		return s.database.TopContentsByTag(genreTable)
 	}
 
+	cachedRes := cache_layer.GetCachedResponseIfPossible(tag)
+	if cachedRes != nil {
+		return cachedRes, nil
+	}
+	topContentsForThisTag, err := s.database.TopContentsByTag(tag)
+	if err != nil {
+		return nil, err
+	}
+	cache_layer.CacheThis(topContentsForThisTag, tag)
+	return topContentsForThisTag, nil
 }
 
 func (s *service) GetContent(contentId int) (*responseModels.ReadContentResponse, error) {

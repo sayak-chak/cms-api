@@ -44,7 +44,7 @@ func (handler *handler) AddContent(ctx *fiber.Ctx) error {
 }
 
 func (handler *handler) TopContentsByTag(ctx *fiber.Ctx) error {
-	topContentsForThisTag, err := handler.service.TopContentsByTag(ctx.Params("genre"))
+	topContentsForThisTag, err := handler.service.TopContentsByTag(ctx.Params("tag"))
 	if err != nil {
 		return custom_errors.CantGetResource()
 	}
