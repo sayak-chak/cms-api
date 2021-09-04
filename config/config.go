@@ -10,4 +10,4 @@ const CachePeriod = 1800 // 30 minutes
 const CommonCacheTag = "default"
 const User = ""
 const DbName = ""
-const PostgresConfig = "postgres://sayakchakraborty@localhost:5432/postgres?sslmode=disable"
+const PostgresConfig = "postgres://username@localhost:5432/postgres?sslmode=disable" //update creds as needed
