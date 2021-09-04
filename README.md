@@ -5,7 +5,7 @@
 - Lightweight, purely in golang
 - Modular monolith CMS API - modules can be easily extended into microservices if needed
 - Highly customizable & extensible
-- Built to scale - [performace benchmarks](load_tests/test_results)
+- Built to scale - [performace benchmarks](https://github.com/sayak-chak/cms-api/blob/master/load_tests/test_results.md)
 
 ## Overview
 
