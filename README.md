@@ -2,8 +2,9 @@
 
 ## Features
 
+- Lightweight, purely in golang
 - Modular monolith CMS API - modules can be easily extended into microservices if needed
-- Highly customizable
+- Highly customizable & extensible
 - Secure
 - Built to scale
 
