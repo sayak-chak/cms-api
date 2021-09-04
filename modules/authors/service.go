@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	otpExpiryPeriod = 10800 // 3 hours
+	otpExpiryPeriod = 21600 // 6 hours
 	bcryptCost      = 12
 )
 
@@ -42,6 +42,11 @@ func (s *service) GetAuthors() []Author {
 
 func (s *service) RegisterNewAuthor(newAuthorAccCreationReq *models.NewAuthorAccCreationRequest) error {
 	//TODO: implement checks
+
+	err := s.database.CleanUpOldOtps(time.Now().Unix(), otpExpiryPeriod)
+	if err != nil {
+		return err
+	}
 
 	phone, err := s.database.GetPhoneFor(newAuthorAccCreationReq.Otp)
 	if err != nil {
@@ -83,7 +88,7 @@ func (s *service) Login(loginReq *models.LoginRequest) (*responses.LoginResponse
 	// Set claims
 	claims := token.Claims.(jwt.MapClaims)
 	claims["authorId"] = authCredsId
-	claims["exp"] = time.Now().Add(time.Minute * 50).Unix()
+	claims["exp"] = time.Now().Add(config.JwtExpirationPeriod).Unix()
 
 	// Generate encoded token and send it as response.
 

@@ -26,8 +26,8 @@
 | /register           | Register (as an author) once an otp has been sent to the mobile number that would be used to register |
 | /login              | Login (as an author) with mobile number & password                                                    |
 | /add-content        | Add new content                                                                                       |
-| /top-contents       | Get list of top few interesting contents                                                              |
-| /top-contents/tag   | Get list of top few interesting content by the provided tag                                           |
+| /top-contents       | Get list of top few interesting contents sorted by votes                                              |
+| /top-contents/tag   | Get list of top few interesting content by the provided tag, sorted by votes                          |
 | /content/content-id | Get the content with the specified content id                                                         |
 | /upvote             | Upvote a specific content                                                                             |
 | /subscribe          | Subscribe to get updates in email                                                                     |
@@ -73,11 +73,11 @@ _Success status - 201_
 ```
 {
     token: string,
-    authorId: int,
+    id: int, // author id
 }
-```
 
-`PS: This is a jwt & should be sent when a new post is to be added, not doing so would result in an authorization failure`
+PS: This is a jwt & should be sent when a new post is to be added, not doing so would result in an authorization failure
+```
 
 ---
 
@@ -85,7 +85,7 @@ _Success status - 201_
 
 ###### Request
 
-_Login auth token should be sent with headers_
+_Authorization bearer token should be sent with headers_
 
 ```
 {
@@ -100,7 +100,7 @@ _Login auth token should be sent with headers_
 
 ###### Response
 
-_Success status - 201_
+_Success status - 200_
 
 ---
 

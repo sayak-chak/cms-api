@@ -7,10 +7,8 @@ import (
 	responseModels "cms-api/models/responses"
 	"cms-api/utils"
 
-	// "fmt"
-
 	"github.com/gofiber/fiber/v2"
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 type Service interface {
@@ -28,10 +26,11 @@ func (s *service) TopContents() (*[]responseModels.TopContentsResponse, error) {
 
 func (s *service) AddContent(addContentRequest *models.AddContentRequest, ctx *fiber.Ctx) error {
 
-	// If needed, cleanup token when logged out/logged in from multiple devices
+	//TODO: If needed, cleanup token when logged out/logged in from multiple devices
 
 	user := ctx.Locals("user").(*jwt.Token)
 	claims := user.Claims.(jwt.MapClaims)
+
 	authorId := claims["authorId"].(float64)
 
 	if authorId != float64(addContentRequest.AuthorId) {

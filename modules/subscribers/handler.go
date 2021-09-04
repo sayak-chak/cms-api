@@ -33,7 +33,11 @@ func (h *handler) AddSubscriber(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	return h.service.AddSubscriber(subscriberEmail.Email)
+	err = h.service.AddSubscriber(subscriberEmail.Email)
+	if err != nil {
+		return err
+	}
+	return ctx.SendStatus(204)
 }
 
 func (h *handler) DeleteSubscriber(ctx *fiber.Ctx) error {
@@ -44,5 +48,9 @@ func (h *handler) DeleteSubscriber(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	return h.service.DeleteSubscriber(subscriberEmail.Email)
+	err = h.service.DeleteSubscriber(subscriberEmail.Email)
+	if err != nil {
+		return err
+	}
+	return ctx.SendStatus(204)
 }

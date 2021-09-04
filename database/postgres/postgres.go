@@ -7,7 +7,6 @@ import (
 	models "cms-api/models/requests"
 	responseModels "cms-api/models/responses"
 	"cms-api/utils"
-	"fmt"
 
 	"github.com/go-pg/pg/v10"
 )
@@ -93,7 +92,6 @@ func (r *Postgres) AddContentToTag(tagTableModel interface{}) error {
 	_, err := db.Model(tagTableModel).Insert()
 
 	if err != nil {
-		fmt.Println("sfsdfsdfsdfsdfsdf", err.Error())
 		return custom_errors.CouldntCompleteYourOperation()
 	}
 

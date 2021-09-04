@@ -5,7 +5,6 @@ import (
 	"cms-api/database"
 	models "cms-api/models/requests"
 	"encoding/json"
-	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -34,8 +33,7 @@ func (h *handler) GetAuthors(ctx *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(string(authorListJson))
-	return nil
+	return ctx.Status(200).Send([]byte(authorListJson))
 }
 
 func (h *handler) RegisterNewAuthor(ctx *fiber.Ctx) error {

@@ -2,7 +2,7 @@ package utils
 
 import (
 	models "cms-api/models/database"
-	"fmt"
+
 	"strings"
 	"sync"
 )
@@ -13,7 +13,6 @@ var lock = sync.RWMutex{}
 
 func GetTagDBNameIfValid(inputTag string) (string, bool) {
 	tag := strings.ToLower(inputTag)
-	fmt.Print("I tried", tag, inputTag)
 	if tagDBName, isValid := tagNamesMap[tag]; !isValid {
 		return "", false
 	} else {

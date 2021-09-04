@@ -5,7 +5,6 @@ import (
 	"cms-api/database"
 	models "cms-api/models/requests"
 	"encoding/json"
-	"fmt"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -34,8 +33,6 @@ type handler struct {
 func (handler *handler) AddContent(ctx *fiber.Ctx) error {
 	var requestBody models.AddContentRequest
 	ctxBody := append([]byte(nil), ctx.Body()...)
-
-	fmt.Println("Re is", string(ctxBody))
 
 	err := json.Unmarshal(ctxBody, &requestBody)
 	if err != nil {
