@@ -214,6 +214,8 @@ _Success status - 204_
 
 - By default, Postgres is used, but any database can work with this by implementing the `Database` interface. The new database directory should be placed in the same level as `postgres` directory. Also, the `database model` might have be updated depending on the database. No other change is needed.
 
+- Mobile number (wherein otp has to be sent pre-registering) is used as the identifier for creating a new account. This can be changed to email/username/anything else by updating the `AuthorCreds` & `AuthorTempCreds` tables.
+
 - Right now the subscribers can only view the contents and the authors can post/view them, the subscibers can be removed if aiming for a model without distinct author/subscriber enitites. That way, everyone can post and view.
 
 - By default, there are some predefined tags based on which filtering of content can be done. To add a new tag, there needs to be another tag table containing the relevant content ids & `tagNamesMap` attribute has to be updated.
