@@ -2,7 +2,7 @@
 
 ## Features
 
-- Modular monolith CMS API - modules can be easily extended into modules if needed
+- Modular monolith CMS API - modules can be easily extended into microservices if needed
 - Highly customizable
 - Secure
 - Built to scale
