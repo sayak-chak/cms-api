@@ -1,11 +1,11 @@
 package server
 
 import (
+	"cms-api/config"
 	"cms-api/database/postgres"
 	"cms-api/modules/authors"
 	"cms-api/modules/authors/contents"
 	"cms-api/modules/subscribers"
-	"os"
 
 	"github.com/gofiber/fiber/v2/middleware/cors"
 
@@ -26,10 +26,7 @@ func StartNewServer() {
 
 	addAllRoutes(&database, app)
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080" // Default port if not specified
-	}
+	port := config.Port
 
 	app.Listen(":" + string(port))
 }
