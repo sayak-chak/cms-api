@@ -3,7 +3,6 @@ package cache_layer
 import (
 	"cms-api/config"
 	models "cms-api/models/responses"
-	"fmt"
 	"sync"
 	"time"
 )
@@ -32,7 +31,6 @@ func GetCachedResponseIfPossible(tag string) *[]models.TopContentsResponse {
 func CacheThis(topArticles *[]models.TopContentsResponse, tag string) {
 	mapLock.Lock()
 	defer mapLock.Unlock()
-	fmt.Println("Returning non cahced response")
 	cacheMap[tag] = &cachedData{
 		lastCacheTime:  int(time.Now().Unix()),
 		cachedResponse: topArticles,

@@ -2,6 +2,7 @@ package main
 
 import (
 	"cms-api/config"
+	"cms-api/server"
 	"os"
 )
 
@@ -11,5 +12,5 @@ func main() {
 		env = "local"
 	}
 	config.UpdateConfigsFor(env)
-	// server.StartNewServer()
+	server.StartNewServer(env)
 }

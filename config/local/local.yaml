@@ -1,4 +1,4 @@
-postgresConfig : "postgres://username@localhost:5432/postgres?sslmode=disable"
+postgresConfig : "postgres://user:mysecretpassword@localhost:3000/postgres?sslmode=disable"
 port : "8080"
 numberOfTopEntriesToConsider : 10
 numberOfLastEntriesToConsiderWhenSearchingByTag : 50

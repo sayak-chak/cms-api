@@ -14,9 +14,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func StartNewServer() {
+func StartNewServer(env string) {
 	database := postgres.Postgres{}
-	err := database.SeedWithMockData()
+	err := database.InitializeDatabase()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = database.SeedWithMockData(env)
 	if err != nil {
 		log.Fatal(err)
 	}

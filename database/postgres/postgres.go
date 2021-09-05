@@ -113,7 +113,9 @@ func (r *Postgres) TopContents() (*[]responseModels.TopContentsResponse, error) 
 		Join(`INNER JOIN 
 			(SELECT * FROM contents ORDER BY votes DESC LIMIT ?) 
 			AS a 
-			ON author.author_creds_id=a.author_creds_id`,
+			ON author.author_creds_id=a.author_creds_id
+			ORDER BY votes DESC LIMIT ?`,
+			config.NumberOfTopEntriesToConsider,
 			config.NumberOfTopEntriesToConsider).
 		Select(&topContents)
 	if err != nil {
@@ -136,7 +138,7 @@ func (r *Postgres) TopContentsByTag(tagTable string) (*[]responseModels.TopConte
 	//SQL injection is not possible here because tagTable isn't user input
 	err := db.Model(&databaseModels.Author{}).Column(`author.name`, `a.id`, `a.author_creds_id`, `a.content`, `a.image_src`, `a.title`, `a.summary`, `a.votes`).
 		Join(`INNER JOIN
-			(SELECT * FROM contents INNER JOIN `+tagTable+` ON contents.id = `+tagTable+`.content_id ORDER BY contents.votes LIMIT ?) 
+			(SELECT * FROM contents INNER JOIN `+tagTable+` ON contents.id = `+tagTable+`.content_id ORDER BY contents.votes DESC LIMIT ?) 
 			AS a 
 			ON author.author_creds_id=a.author_creds_id`,
 			config.NumberOfLastEntriesToConsiderWhenSearchingByTag).
