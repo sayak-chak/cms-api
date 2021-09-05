@@ -7,6 +7,20 @@
 - Highly customizable & extensible
 - Built to scale - [performace benchmarks](https://github.com/sayak-chak/cms-api/blob/master/load_tests/test_results.md)
 
+## Quickstart
+
+###### Bring up the service
+
+`make start-service` and post its completion, `make start-server`
+
+```
+PS: The DB is seeded with some dummy data when the service is started locally
+```
+
+###### Bring down the service
+
+`make stop-service`
+
 ## Overview
 
 | Directory | Description                                                                                                                                                                                   |
@@ -40,12 +54,14 @@
 ###### Request
 
 ```
+
 {
-    otp: string,
-    password: string,
-    mobile: number,
-    name: string,
+otp: string,
+password: string,
+mobile: number,
+name: string,
 }
+
 ```
 
 ###### Response
@@ -59,10 +75,12 @@ _Success status - 201_
 ###### Request
 
 ```
+
 {
-    mobile: number,
-    password: string,
+mobile: number,
+password: string,
 }
+
 ```
 
 ###### Response
@@ -70,12 +88,14 @@ _Success status - 201_
 _Success status - 201_
 
 ```
+
 {
-    token: string,
-    id: int, // author id
+token: string,
+id: int, // author id
 }
 
 PS: This is a jwt & should be sent when a new post is to be added, not doing so would result in an authorization failure
+
 ```
 
 ---
@@ -87,14 +107,16 @@ PS: This is a jwt & should be sent when a new post is to be added, not doing so 
 _Authorization bearer token should be sent with headers_
 
 ```
+
 {
-    tags: [string],
-    title: string,
-    summary: string,
-    body: string, // main content body
-    imageSrc: string, // url to image used
-    authorId: int
+tags: [string],
+title: string,
+summary: string,
+body: string, // main content body
+imageSrc: string, // url to image used
+authorId: int
 }
+
 ```
 
 ###### Response
@@ -108,18 +130,20 @@ _Success status - 200_
 ###### Response
 
 ```
+
 [
-    {
-        author: string, // name
-        contentId: string,
-        authorId: string,
-        body: string, // content body
-        imageSrc:  string, // url to image used
-        title: string,
-        summary: string,
-        votes: number
-    }
+{
+author: string, // name
+contentId: string,
+authorId: string,
+body: string, // content body
+imageSrc: string, // url to image used
+title: string,
+summary: string,
+votes: number
+}
 ]
+
 ```
 
 `PS: Ideally this should be cached on client side to reduce load on server when a specific content is requested`
@@ -131,16 +155,18 @@ _Success status - 200_
 ###### Response
 
 ```
+
 {
-    author: string, // name
-    contentId: string,
-    authorId: string,
-    body: string, // content body
-    imageSrc:  string, // url to image used
-    title: string,
-    summary: string,
-    votes: number
+author: string, // name
+contentId: string,
+authorId: string,
+body: string, // content body
+imageSrc: string, // url to image used
+title: string,
+summary: string,
+votes: number
 }
+
 ```
 
 ---
@@ -150,9 +176,11 @@ _Success status - 200_
 ###### Request
 
 ```
+
 {
-   contentId: int
+contentId: int
 }
+
 ```
 
 ###### Response
@@ -166,9 +194,11 @@ _Success status - 200_
 ###### Request
 
 ```
+
 {
-   email: string
+email: string
 }
+
 ```
 
 ###### Response
@@ -182,9 +212,11 @@ _Success status - 204_
 ###### Request
 
 ```
+
 {
-   email: string
+email: string
 }
+
 ```
 
 ###### Response
@@ -198,14 +230,16 @@ _Success status - 204_
 ###### Response
 
 ```
+
 {
-    [
-        {
-            name: string
-        }
-    ]
+[
+{
+name: string
+}
+]
 
 }
+
 ```
 
 ---
@@ -227,3 +261,7 @@ _Success status - 204_
 - By default, otp is valid for 6 hours, the `otpExpiryPeriod` needs to be updated to change this.
 
 - JWT authetication is used, but the api is flexible enough to work with any auth system - just the appropriate auth middleware needs to be updated.
+
+```
+
+```
