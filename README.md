@@ -56,10 +56,10 @@ PS: The DB is seeded with some dummy data when the service is started locally
 ```
 
 {
-otp: string,
-password: string,
-mobile: number,
-name: string,
+    otp: string,
+    password: string,
+    mobile: number,
+    name: string,
 }
 
 ```
@@ -77,8 +77,8 @@ _Success status - 201_
 ```
 
 {
-mobile: number,
-password: string,
+    mobile: number,
+    password: string,
 }
 
 ```
@@ -90,8 +90,8 @@ _Success status - 201_
 ```
 
 {
-token: string,
-id: int, // author id
+    token: string,
+    id: int, // author id
 }
 
 PS: This is a jwt & should be sent when a new post is to be added, not doing so would result in an authorization failure
@@ -109,12 +109,12 @@ _Authorization bearer token should be sent with headers_
 ```
 
 {
-tags: [string],
-title: string,
-summary: string,
-body: string, // main content body
-imageSrc: string, // url to image used
-authorId: int
+    tags: [string],
+    title: string,
+    summary: string,
+    body: string, // main content body
+    imageSrc: string, // url to image used
+    authorId: int
 }
 
 ```
@@ -132,16 +132,16 @@ _Success status - 200_
 ```
 
 [
-{
-author: string, // name
-contentId: string,
-authorId: string,
-body: string, // content body
-imageSrc: string, // url to image used
-title: string,
-summary: string,
-votes: number
-}
+    {
+        author: string, // name
+        contentId: string,
+        authorId: string,
+        body: string, // content body
+        imageSrc: string, // url to image used
+        title: string,
+        summary: string,
+        votes: number
+    }
 ]
 
 ```
@@ -157,14 +157,14 @@ votes: number
 ```
 
 {
-author: string, // name
-contentId: string,
-authorId: string,
-body: string, // content body
-imageSrc: string, // url to image used
-title: string,
-summary: string,
-votes: number
+    author: string, // name
+    contentId: string,
+    authorId: string,
+    body: string, // content body
+    imageSrc: string, // url to image used
+    title: string,
+    summary: string,
+    votes: number
 }
 
 ```
@@ -178,7 +178,7 @@ votes: number
 ```
 
 {
-contentId: int
+    contentId: int
 }
 
 ```
@@ -196,7 +196,7 @@ _Success status - 200_
 ```
 
 {
-email: string
+    email: string
 }
 
 ```
@@ -214,7 +214,7 @@ _Success status - 204_
 ```
 
 {
-email: string
+    email: string
 }
 
 ```
@@ -232,11 +232,11 @@ _Success status - 204_
 ```
 
 {
-[
-{
-name: string
-}
-]
+    [
+        {
+            name: string
+        }
+    ]
 
 }
 
